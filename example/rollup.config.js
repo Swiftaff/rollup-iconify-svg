@@ -3,7 +3,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
-import rollupiconifysvg from "../src/index";
+import rolluppluginiconifysvg from "../src/index";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -37,7 +37,7 @@ export default {
         file: "example/public/build/bundle.js",
     },
     plugins: [
-        rollupiconifysvg({
+        rolluppluginiconifysvg({
             targets: [{ src: "example/src", dest: "example/src/icons.js" }],
         }),
         svelte({

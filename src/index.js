@@ -1,9 +1,9 @@
 import svelteiconifysvg from "svelte-iconify-svg";
 
-const rollupiconifysvg = (options = {}) => {
+const rolluppluginiconifysvg = (options = {}) => {
     const { targets = [], hook = "buildEnd" } = options;
     return {
-        name: "rollupiconifysvg",
+        name: "rolluppluginiconifysvg",
         [hook]: () => {
             targets.forEach(async (target) => {
                 let src = target.src ? (Array.isArray(target.src) ? target.src : [target.src]) : ["src"];
@@ -15,4 +15,4 @@ const rollupiconifysvg = (options = {}) => {
     };
 };
 
-export default rollupiconifysvg;
+export default rolluppluginiconifysvg;

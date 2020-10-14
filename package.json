@@ -1,11 +1,23 @@
 {
-  "name": "rollup-iconify-svg",
-  "version": "1.0.0",
+  "name": "rollup-plugin-iconify-svg",
+  "version": "1.0.1",
+  "description": "A rollup plugin to autogenerate svg markup from iconify references in your svelte project",
+  "main": "src/index.js",
   "keywords": [
     "rollup-plugin",
     "svg",
     "iconify"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Swiftaff/rollup-plugin-iconify-svg.git"
+  },
+  "author": "Swiftaff",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Swiftaff/rollup-plugin-iconify-svg/issues"
+  },
+  "homepage": "https://github.com/Swiftaff/rollup-plugin-iconify-svg#readme",
   "scripts": {
     "test_build": "rollup -c example/rollup.config.js",
     "test_dev": "rollup -c example/rollup.config.js -w",

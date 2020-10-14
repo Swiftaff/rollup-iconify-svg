@@ -1,6 +1,6 @@
 # Rollup Iconify SVG (Markup Exporter)
 
-[![github-package.json-version](https://img.shields.io/github/package-json/v/Swiftaff/rollup-iconify-svg?style=social&logo=github)](https://github.com/Swiftaff/rollup-iconify-svg) [![The MIT License](https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square)](http://opensource.org/licenses/MIT)
+[![github-package.json-version](https://img.shields.io/github/package-json/v/Swiftaff/rollup-plugin-iconify-svg?style=social&logo=github)](https://github.com/Swiftaff/rollup-plugin-iconify-svg) [![The MIT License](https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
 ## Purpose
 
@@ -15,7 +15,7 @@ It will then save a .js file which exports an `icons` object of all iconify file
 ## Installation
 
 ```
-npm install rollup-iconify-svg --save-dev
+npm install rollup-plugin-iconify-svg --save-dev
 ```
 
 ## Usage
@@ -25,14 +25,14 @@ Add to your 'rollup.config.js'
 ```
 // ...other rollup imports
 
-import rollupiconifysvg from "rollup-iconify-svg";
+import rolluppluginiconifysvg from "rollup-plugin-iconify-svg";
 
 export default {
 
   // ...other rollup config
 
   plugins: [
-    rollupiconifysvg({
+    rolluppluginiconifysvg({
         targets: [{ src: "src", dest: "public/build/icons.js" }],
     }),
 
