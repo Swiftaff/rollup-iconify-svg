@@ -1,105 +1,83 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+# Rollup Iconify SVG (Markup Exporter)
 
----
+[![github-package.json-version](https://img.shields.io/github/package-json/v/Swiftaff/rollup-iconify-svg?style=social&logo=github)](https://github.com/Swiftaff/rollup-iconify-svg) [![The MIT License](https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
-# svelte app
+## Purpose
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+An experimental rollup plugin to run [svelte-iconify-svg](https://github.com/Swiftaff/svelte-iconify-svg)
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+## How it works
 
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
+Checks the contents of all your files in the supplied 'src' directories for any references to 'iconify' icons.
+i.e. any text in the format 'alphanumericordashes colon alphanumericordashes' such as `fa:random` or `si-glyph:pin-location-2`
+It will then save a .js file which exports an `icons` object of all iconify files found in your project.
+
+## Installation
+
+```
+npm install rollup-iconify-svg --save-dev
 ```
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+## Usage
 
+Add to your 'rollup.config.js'
 
-## Get started
+```
+// ...other rollup imports
 
-Install the dependencies...
+import rollupiconifysvg from "rollup-iconify-svg";
 
-```bash
-cd svelte-app
-npm install
+export default {
+
+  // ...other rollup config
+
+  plugins: [
+    rollupiconifysvg({
+        targets: [{ src: "src", dest: "public/build/icons.js" }],
+    }),
+
+    // ...other rollup plugins
+
+    // If you are using watch, you may need to exclude the dest file to avoid recursive watching!
+    watch: {
+      clearScreen: false,
+      exclude:["public/build/icons.js"]
+    },
+
+    ]
+};
+
 ```
 
-...then start [Rollup](https://rollupjs.org):
+### Options
 
-```bash
-npm run dev
+-   targets: an array of options for each set of icons you wish to save. Normally just one.
+-   src: either a path (string) to the folder to search, or array of paths (strings). If undefined it will default to 'src'
+-   dest: the filepath (string) where you want the icons saved
+-   if the dest is a directory rather than a file ending in ".js" then the plugin will run in experimental mode to save SVGs as files for embedding, instead of the default JS object. Not able to automatically style svg colours with this approach though.
+-
+
+## Usage (in svelte)
+
+Using the svelte @html feature
+
+```
+// src/example.svelte
+<script>
+import { icons } from "./src/icons.js"; // this is the 'dest' file which the plugin has generated
+</script>
+
+{@html icons["fa:random"]}
 ```
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+So in this simple example above, assuming you set 'src' as the 'src' directory in the plugin, and 'src/icons.js' as the 'dest' - then the "fa:random" text above would be found by the plugin, the icon auto-generated during bundling, then displayed by svelte in the @html tag - all in one smooth step!
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
+No more downloading svgs manually, just find the references on iconify, e.g. https://iconify.design/icon-sets/fa/random.html, and paste into your @html blocks then each icon will be generated during bundling and ready for you to use.
 
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
+This obviously inlines each instance of the SVG on the page - so probably not recommended if you have hundreds of icons.
 
-## Building and running in production mode
+Using inline (mono) SVGs means they can inherit the colour from CSS too for easy icon colouring
 
-To create an optimised version of the app:
+## License
 
-```bash
-npm run build
-```
-
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
-
-
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
-
-```js
-"start": "sirv public --single"
-```
-
-## Using TypeScript
-
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
-
-```bash
-node scripts/setupTypeScript.js
-```
-
-Or remove the script via:
-
-```bash
-rm scripts/setupTypeScript.js
-```
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+This project is licensed under the MIT License.

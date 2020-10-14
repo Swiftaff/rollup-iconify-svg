@@ -4,7 +4,6 @@ import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 import rollupiconifysvg from "../src/index";
-import replace from "@rollup/plugin-replace";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -39,7 +38,7 @@ export default {
     },
     plugins: [
         rollupiconifysvg({
-            targets: [{ src: "example/src", dest: "example/public/build/icons/" }],
+            targets: [{ src: "example/src", dest: "example/src/icons.js" }],
         }),
         svelte({
             // enable run-time checks when not in production
@@ -61,10 +60,6 @@ export default {
             dedupe: ["svelte"],
         }),
         commonjs(),
-        replace({
-            "iconify#": "",
-            "#iconify": ".svg",
-        }),
 
         // In dev mode, call `npm run start` once
         // the bundle has been generated
@@ -80,5 +75,6 @@ export default {
     ],
     watch: {
         clearScreen: false,
+        exclude: ["example/src/icons.js"],
     },
 };

@@ -6,8 +6,10 @@ const rollupiconifysvg = (options = {}) => {
         name: "rollupiconifysvg",
         [hook]: () => {
             targets.forEach(async (target) => {
-                let src = Array.isArray(target.src) ? target.src : [target.src];
-                svelteiconifysvg(src, target.dest, true);
+                let src = target.src ? (Array.isArray(target.src) ? target.src : [target.src]) : ["src"];
+                let dest = target.dest;
+                let save_as_files = !dest.endsWith(".js");
+                svelteiconifysvg(src, dest, save_as_files);
             });
         },
     };

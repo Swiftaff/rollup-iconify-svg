@@ -1,6 +1,6 @@
 <script>
   export let name;
-  //import { icons } from "../public/build/icons.js";
+  import { icons } from "./icons.js";
 </script>
 
 <style>
@@ -24,10 +24,6 @@
       max-width: none;
     }
   }
-  img,
-  object {
-    color: red;
-  }
 </style>
 
 <main>
@@ -37,13 +33,5 @@
     <a href="https://svelte.dev/tutorial">Svelte tutorial</a>
     to learn how to build Svelte apps.
   </p>
-  <!--img alt="pic" src="/build/icons/iconify#carbon-sunny#iconify" />
-
-  <object
-    type="image/svg+xml"
-    title="icon"
-    width="32px"
-    data="/build/icons/iconify#fa-random#iconify" /-->
-
-  <div id="testy" />
+  {@html icons['emojione:hear-no-evil-monkey']}
 </main>
