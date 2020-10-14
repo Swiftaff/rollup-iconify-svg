@@ -1,4 +1,4 @@
-import svelteiconifysvg from "svelte-iconify-svg";
+const svelteiconifysvg = require("svelte-iconify-svg");
 
 const rolluppluginiconifysvg = (options = {}) => {
     const { targets = [], hook = "buildEnd" } = options;
@@ -15,4 +15,4 @@ const rolluppluginiconifysvg = (options = {}) => {
     };
 };
 
-export default rolluppluginiconifysvg;
+module.exports = rolluppluginiconifysvg;
