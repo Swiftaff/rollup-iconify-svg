@@ -70,7 +70,7 @@ export default {
 ```
 // src/example.svelte
 <script>
-import { icons } from "./src/icons.js"; // this is the 'dest' file which the plugin has generated
+import icons from "./src/icons.js"; // this is the 'dest' file which the plugin has generated
 </script>
 
 {@html icons["fa:random"]}
