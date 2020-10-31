@@ -1,12 +1,11 @@
 # rollup-plugin-iconify-svg (Markup Exporter)
 
 [![github-package.json-version](https://img.shields.io/github/package-json/v/Swiftaff/rollup-plugin-iconify-svg?style=social&logo=github)](https://github.com/Swiftaff/rollup-plugin-iconify-svg) [![The MIT License](https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square)](http://opensource.org/licenses/MIT)
+[![CircleCI](https://circleci.com/gh/Swiftaff/rollup-plugin-iconify-svg.svg?style=svg)](https://circleci.com/gh/Swiftaff/rollup-plugin-iconify-svg)
 
 ## Purpose
 
 An experimental rollup plugin to run [svelte-iconify-svg](https://github.com/Swiftaff/svelte-iconify-svg)
-
-## Why?
 
 If you're experimenting with variants of icons, or trying out different icon sets in your project - it takes time to find and include the right files in your template whether they are fonts or svgs or images. Yes it's greate to be able to search for icons from multiple icon sets in https://iconify.design but even then you usually need to export each icon - or use their (very nice) [JavaScript API](https://docs.iconify.design/sources/api/) to dynamically include them.
 
@@ -44,6 +43,9 @@ export default {
 
     // ...other rollup plugins
 
+    // If you are using livereload, you may need to add a 'delay' to allow some time for the icons file to be created
+    !production && livereload({ watch: "public", delay: 1000 }),
+
     // If you are using watch, you may need to exclude the dest file to avoid recursive watching!
     watch: {
       clearScreen: false,
@@ -58,10 +60,10 @@ export default {
 ### Rollup plugin options
 
 -   targets: an array of options for each set of icons you wish to save. Normally just one.
--   src: either a path (string) to the folder to search, or array of paths (strings). If undefined it will default to 'src'
--   dest: the filepath (string) where you want the icons saved
--   if the dest is a directory rather than a file ending in ".js" then the plugin will run in experimental mode to save SVGs as files for embedding, instead of the default JS object. Not able to automatically style svg colours with this approach though.
--
+    -   src: either a path (string) to the folder to search, or array of paths (strings). If undefined it will default to 'src'
+    -   dest: the filepath (string) where you want the icons saved
+    -   if the dest is a directory rather than a file ending in ".js" then the plugin will run in experimental mode to save SVGs as files for embedding, instead of the default JS object. Not able to automatically style svg colours with this approach though.
+-   commonJs: (optional) By default is false so you can easily embed your icons into svelte using ES6 import syntax, but set it to true if you wish to 'require' the file instead
 
 ### Example usage in svelte using the @html feature
 
@@ -74,7 +76,12 @@ import { icons } from "./src/icons.js"; // this is the 'dest' file which the plu
 {@html icons["fa:random"]}
 ```
 
-In this simple example above, assuming you set 'src' as the 'src' directory in the plugin, and 'src/icons.js' as the 'dest' - then the "fa:random" text above would be found by the plugin, the icon auto-generated during bundling, then displayed by svelte in the @html tag - all in one smooth step!
+In this simple example above, assuming you set 'src' as the 'src' directory in the plugin, and 'src/icons.js' as the 'dest' - then
+
+-   the "fa:random" text above would be found by the plugin within this example.svelte file (because it's in the src directory)
+-   the icons.js file would be auto-generated during bundling
+-   then the icon would be displayed by svelte in the @html tag
+-   all in one smooth step!
 
 This obviously inlines each instance of the SVG on the page - so probably not recommended if you are using hundreds of icons.
 

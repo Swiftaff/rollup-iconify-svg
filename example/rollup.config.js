@@ -3,7 +3,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
-import rolluppluginiconifysvg from "../src/index";
+const rolluppluginiconifysvg = require("../src/index");
 
 const production = !process.env.ROLLUP_WATCH;
 
