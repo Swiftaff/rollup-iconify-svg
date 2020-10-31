@@ -2,10 +2,11 @@ version: 2.1
 orbs:
     node: circleci/node@3.0.0
 jobs:
-    docker:
-        - image: circleci/node:12 # Use your desired version
-          environment:
-              NODE_ENV: development # Only needed if puppeteer is in `devDependencies`
+    build:
+        docker:
+            - image: circleci/node:12 # Use your desired version
+              environment:
+                  NODE_ENV: development # Only needed if puppeteer is in `devDependencies`
 workflows:
     node-tests:
         jobs:
