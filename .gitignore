@@ -2,3 +2,4 @@
 /public/build/
 test/outputs/*
 .DS_Store
+**/icons*.js

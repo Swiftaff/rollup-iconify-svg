@@ -71,6 +71,8 @@ export default {
 // src/example.svelte
 <script>
 import icons from "./src/icons.js"; // this is the 'dest' file which the plugin has generated
+// or for rollup-plugin-iconify-svg versions older than 2.0.0 please use this syntax instead
+// import { icons }  from "./src/icons.js";
 </script>
 
 {@html icons["fa:random"]}
@@ -83,9 +85,11 @@ In this simple example above, assuming you set 'src' as the 'src' directory in t
 -   then the icon would be displayed by svelte in the @html tag
 -   all in one smooth step!
 
-This obviously inlines each instance of the SVG on the page - so probably not recommended if you are using hundreds of icons.
+For an example of a working svelte app - please see: https://github.com/Swiftaff/rollup-plugin-iconify-svg/tree/master/example
 
-But using inline mono SVGs (rather than via separate svg files in object or img tags or via css background-image) does mean they can inherit the colour from CSS for easy icon colouring.
+This plugin obviously inlines each instance of the SVG on the page - so probably not recommended if you are using hundreds of icons!
+
+But using inline mono SVGs (rather than via separate svg files in object or img tags or via css background-image) does mean they can inherit the colour from CSS for easy icon colouring :-)
 
 ## License
 

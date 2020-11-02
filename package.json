@@ -22,6 +22,9 @@
     "test_build": "rollup -c example/rollup.config.js",
     "test_dev": "rollup -c example/rollup.config.js -w",
     "test_start": "sirv example/public",
+    "test2_build": "rollup -c example2/rollup.config.js",
+    "test2_dev": "rollup -c example2/rollup.config.js -w",
+    "test2_start": "sirv example2/public -p 5001",
     "test": "ava",
     "test_update_snapshots": "ava --update-snapshots"
   },
