@@ -78,6 +78,6 @@ export default {
     ],
     watch: {
         clearScreen: false,
-        exclude: ["example2/src/icons.js", "example2/src/sunfolder/icons1.js"],
+        exclude: ["example2/src/icons.js", "example2/src/subfolder/icons1.js"],
     },
 };

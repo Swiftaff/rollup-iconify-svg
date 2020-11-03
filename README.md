@@ -7,17 +7,19 @@
 
 An experimental rollup plugin to run [svelte-iconify-svg](https://github.com/Swiftaff/svelte-iconify-svg)
 
-If you're experimenting with variants of icons, or trying out different icon sets in your project - it takes time to find and include the right files in your template whether they are fonts or svgs or images. Yes it's greate to be able to search for icons from multiple icon sets in https://iconify.design but even then you usually need to export each icon - or use their (very nice) [JavaScript API](https://docs.iconify.design/sources/api/) to dynamically include them.
+If you're trying out different icons, or icon collections in your project - it takes time to find and include the right files in your template whether they are fonts or SVGs or images. Yes it's great to be able to search for icons from multiple icon sets in https://iconify.design but even then you usually need to export each icon - or use their (very nice) [Iconify API](https://docs.iconify.design/sources/api/) to dynamically include them.
 
 But what if you're app works offline, or is embedded, or you just don't want to call another CDN script for every page load, when you just want to try out a couple of icons.
 
-This plugin allows you to simply type an icon reference into your app code, and the icon svg markup is then auto-embedded, assuming you have set up watch/hot-reloading and no icon-name typos!
+## Fast dev experience - immediately use and see Iconify icons in your app!
+
+This plugin allows you to simply type an icon reference into your svelte app code, hit save, and reload the page to view the auto-bundled icon svg markup!
 
 ## How it works
 
 Checks the contents of all your files in the supplied 'src' directories for any references to 'iconify' icons.
 i.e. any text in the format 'alphanumericordashes colon alphanumericordashes' such as `fa:random` or `si-glyph:pin-location-2`
-It will then use the Iconify API to generate markup for each icon reference found, then the plugin simply saves a .js file which exports an `icons` object of them all, for you to use as you wish.
+It then uses the [Iconify API](https://docs.iconify.design/sources/api/) to generate markup for each icon reference found, then the plugin simply saves a .js file which exports an `icons` object of them all, which gets auto-bundled into your app.
 
 ## Installation
 
@@ -67,29 +69,64 @@ export default {
 
 ### Example usage in svelte using the @html feature
 
+The simplest project would be similar to example 1 in Working Examples below
+
 ```
-// src/example.svelte
+// ./src/App.svelte
 <script>
 import icons from "./src/icons.js"; // this is the 'dest' file which the plugin has generated
-// or for rollup-plugin-iconify-svg versions older than 2.0.0 please use this syntax instead
-// import { icons }  from "./src/icons.js";
 </script>
 
 {@html icons["fa:random"]}
 ```
 
-In this simple example above, assuming you set 'src' as the 'src' directory in the plugin, and 'src/icons.js' as the 'dest' - then
+So in this simple example, assuming you have set 'src' as the 'src' directory and 'src/icons.js' as the 'dest' in the rollup plugin options - then
 
--   the "fa:random" text above would be found by the plugin within this example.svelte file (because it's in the src directory)
+-   each time you save a file - rollup will run this plugin
+-   the "fa:random" text above would be found within this App.svelte file (because it's in the src directory)
 -   the icons.js file would be auto-generated during bundling
--   then the icon would be displayed by svelte in the @html tag
+-   rollup will then reload the page and the icon would be displayed by svelte in the @html tag
 -   all in one smooth step!
 
-For an example of a working svelte app - please see: https://github.com/Swiftaff/rollup-plugin-iconify-svg/tree/master/example
+## Quickly adding/replacing Iconify icons...
 
-This plugin obviously inlines each instance of the SVG on the page - so probably not recommended if you are using hundreds of icons!
+1. Go to Iconify and search for another icon from any collection - mix-and-match as much as you like! e.g. https://iconify.design/icon-sets/?query=emoji
+2. Find an icon you like, e.g. https://iconify.design/icon-sets/line-md/emoji-grin.html
+3. The icon reference you need is in the format 'collection-name:icon-name'
+4. So if you then add `{@html icons["line-md:emoji-grin"]}` to the App.svelte file above, hit save, your dev build will auto-refresh showing the new icon!
 
-But using inline mono SVGs (rather than via separate svg files in object or img tags or via css background-image) does mean they can inherit the colour from CSS for easy icon colouring :-)
+## Working examples
+
+1. Clone this repo
+2. Basic test: Run `npm run test_dev` and visit `localhost:5000` to build and view the first example and auto-generate the icon file `/example/src/icons.js` (like the example described above)<br />
+   https://github.com/Swiftaff/rollup-plugin-iconify-svg/tree/master/example
+3. More features: Run `npm run test2_dev` and visit `localhost:5001` to build the second example and auto-generate 2 icon files `/example2/src/subfolder/icons1.js` & `/example2/src/icons2.js`. This is because of the array of 2 x targets in rollup.config.js - for when you wish to generate multiple icon files for different parts of your app.<br /><br />
+   https://github.com/Swiftaff/rollup-plugin-iconify-svg/tree/master/example2
+
+    This example also shows some basic ways to colour and size your icons using CSS
+
+    And if you see 'undefined' appearing in your UI, like in this example - you may have an icon name typo. Just check the generated icons.js file - at the top and it should list any errors, as you can see in `/example2/src/subfolder/icons1.js`.
+
+```
+/*
+x ERROR no such icon prefix 'emojione-wrong:' - in these icon names ('emojione-wrong:speak-no-evil-monkey')
+x ERROR no such icon name   'emojione:hear-no-evil-monkey-wrong'
+*/
+```
+
+## Versions below 2.0.0
+
+The latest version is recommended, but if you do wish to use earlier versions please note the import syntax changed from 2.0.0 onwards to the above import syntax. Earlier versions use this syntax instead...
+
+```
+import { icons }  from "./src/icons.js";
+```
+
+## Notes
+
+This plugin obviously inlines each instance of the SVG on the page - so probably not recommended if you are using hundreds of icons! But you can split them into multiple files if that helps.
+
+Using inline mono SVGs (rather than via separate svg files in object or img tags or via css background-image) does mean they can inherit the colour from CSS for easy icon colouring :-) See example2 above
 
 ## License
 
