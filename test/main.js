@@ -45,3 +45,30 @@ test("test2 build a svelte app", withPage, async (t, page) => {
     const result = await page.content();
     t.snapshot(result);
 });
+
+test("test3 build another svelte app", withPage, async (t, page) => {
+    const bundle = await rollup({
+        input: "./example2/src/main.js",
+        plugins: [
+            rolluppluginiconifysvg({
+                targets: [
+                    { src: "example2/src", dest: "example2/src/icons.js" },
+                    { src: "example2/src/subfolder", dest: "example2/src/subfolder/icons1.js" },
+                ],
+            }),
+            svelte(),
+            nodeResolve({
+                browser: true,
+                dedupe: ["svelte"],
+            }),
+            commonjs(),
+            terser(),
+        ],
+    });
+    const output = await bundle.generate({ sourcemap: true, format: "iife" });
+    let html = `<!DOCTYPE html><html lang="en"><head><title>Svelte app</title></head><body></body></html>`;
+    await page.setContent(html);
+    page.evaluate(output.output[0].code);
+    const result = await page.content();
+    t.snapshot(result);
+});
