@@ -50,6 +50,6 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
-    "svelte-iconify-svg": "^2.0.0"
+    "svelte-iconify-svg": "^2.0.1"
   }
 }

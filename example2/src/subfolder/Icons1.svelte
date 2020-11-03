@@ -2,12 +2,13 @@
   import icons from "./icons1.js";
 </script>
 
+{@html icons['emojione:hear-no-evil-monkey-wrong']}
+{@html icons['emojione-wrong:speak-no-evil-monkey']}
+
 {@html icons['emojione:hear-no-evil-monkey']}
 {@html icons['emojione:speak-no-evil-monkey']}
 {@html icons['emojione:see-no-evil-monkey']}
 {@html icons['fa:random']}
-{@html icons['bxs:checkbox-checked']}
-{@html icons['bx:checkbox-checked']}
 
 {@html icons['mdi:checkbox-multiple-marked']}
 {@html icons['ls:checkbox']}
