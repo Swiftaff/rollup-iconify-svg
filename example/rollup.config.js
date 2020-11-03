@@ -29,6 +29,7 @@ function serve() {
 }
 
 export default {
+    cache: false,
     input: "example/src/main.js",
     output: {
         sourcemap: true,
