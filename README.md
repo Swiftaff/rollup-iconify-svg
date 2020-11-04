@@ -122,6 +122,18 @@ The latest version is recommended, but if you do wish to use earlier versions pl
 import { icons }  from "./src/icons.js";
 ```
 
+And if you have issues with a clean first build of your app, where it expects the icons.js file(s) to already exists and won't build because they are missing e.g. via github Actions or other automated build process, you can try this workaround to simply add a placeholder for the expected built icon file(s),
+
+e.g. in example 1 you would add `example/src/icons.js`<br />
+and for example 2, you would add these files `example2/src/subfolder/icons.js` and `example2/src/icons1.js`<br />
+These placeholders can be a copy of a previously built version of the final files, or maybe just an empty export to then allow the build process to proceed and re-generate them...
+
+```
+export default = {};
+```
+
+This should be working in v2 upwards, but please report any issues.
+
 ## Notes
 
 This plugin obviously inlines each instance of the SVG on the page - so probably not recommended if you are using hundreds of icons! But you can split them into multiple files if that helps.

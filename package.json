@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-iconify-svg",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A rollup plugin to autogenerate svg markup from iconify references in your svelte project",
   "main": "src/index.js",
   "keywords": [
