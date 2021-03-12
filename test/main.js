@@ -93,10 +93,10 @@ test("test4a options - src defaults to 'src'", withPage, async (t, page) => {
 
 test("test4b options - dest defaults to 'src/icons.js'", withPage, async (t, page) => {
     const bundle = await rollup({
-        input: "./test/fixtures/test1/test.js",
+        input: "./test/fixtures/farandom/index.js",
         plugins: [
             rolluppluginiconifysvg({
-                targets: [{ src: "./test/fixtures/test1" }],
+                targets: [{ src: "./test/fixtures/farandom" }],
                 commonJs: true, // allows output file to be required below
             }),
         ],
@@ -108,7 +108,7 @@ test("test4b options - dest defaults to 'src/icons.js'", withPage, async (t, pag
 
 test("test4c options - targets defaults to [{ src: 'src', dest: 'src/icons.js' }]", withPage, async (t, page) => {
     const bundle = await rollup({
-        input: "./test/fixtures/test1/test.js",
+        input: "./test/fixtures/farandom/index.js",
         plugins: [
             rolluppluginiconifysvg({
                 commonJs: true, // allows output file to be required below
