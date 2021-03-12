@@ -67,6 +67,7 @@ export default {
     -   if the dest is a directory rather than a file ending in ".js" then the plugin will run in experimental mode to save SVGs as files for embedding, instead of the default JS object. Not able to automatically style svg colours with this approach though.
 -   commonJs: By default is false so you can easily embed your icons into svelte using ES6 import syntax, but set it to true if you wish to 'require' the file instead
 -   alwaysSave: forces the iconify API network call and re-save of the icons file, instead of the default which will skip these if the icons list has not changed
+-   recursive: recursively searches within each input directory, instead of the default which will only search within the first level of input directories
 
 ### Example usage in svelte using the @html feature
 

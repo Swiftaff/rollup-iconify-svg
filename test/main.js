@@ -222,3 +222,66 @@ test("test4f options - alwaysSave = true will overwrite file even if identical",
     };
     t.snapshot(result);
 });
+
+test(
+    "test5a options - recursive = true will search recursively within input directories",
+    withPage,
+    async (t, page) => {
+        const full_output_path = path.join(__dirname, "./outputs/test5a.js");
+
+        //first run
+        await del([full_output_path]);
+        const bundle = await rollup({
+            input: "./test/fixtures/test5/test.js",
+            plugins: [
+                rolluppluginiconifysvg({
+                    targets: [{ src: "./test/fixtures/test5", dest: "./test/outputs/test5a.js" }],
+                    recursive: true,
+                    commonJs: true, // allows output file to be required below
+                }),
+            ],
+        });
+        await bundle.generate({ format: "cjs" });
+        const icons = require("./outputs/test5a.js");
+        t.snapshot(icons);
+    }
+);
+
+test("test5b options - recursive = false will only search within input directories", withPage, async (t, page) => {
+    const full_output_path = path.join(__dirname, "./outputs/test5b.js");
+
+    //first run
+    await del([full_output_path]);
+    const bundle = await rollup({
+        input: "./test/fixtures/test5/test.js",
+        plugins: [
+            rolluppluginiconifysvg({
+                targets: [{ src: "./test/fixtures/test5", dest: "./test/outputs/test5b.js" }],
+                recursive: false,
+                commonJs: true, // allows output file to be required below
+            }),
+        ],
+    });
+    await bundle.generate({ format: "cjs" });
+    const icons = require("./outputs/test5b.js");
+    t.snapshot(icons);
+});
+
+test("test5c options - recursive missing will only search within input directories", withPage, async (t, page) => {
+    const full_output_path = path.join(__dirname, "./outputs/test5c.js");
+
+    //first run
+    await del([full_output_path]);
+    const bundle = await rollup({
+        input: "./test/fixtures/test5/test.js",
+        plugins: [
+            rolluppluginiconifysvg({
+                targets: [{ src: "./test/fixtures/test5", dest: "./test/outputs/test5c.js" }],
+                commonJs: true, // allows output file to be required below
+            }),
+        ],
+    });
+    await bundle.generate({ format: "cjs" });
+    const icons = require("./outputs/test5c.js");
+    t.snapshot(icons);
+});

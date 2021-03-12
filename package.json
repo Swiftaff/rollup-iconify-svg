@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-iconify-svg",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "A rollup plugin to autogenerate svg markup from iconify references in your svelte project",
   "main": "src/index.js",
   "keywords": [
@@ -25,8 +25,8 @@
     "test2_build": "rollup -c example2/rollup.config.js",
     "test2_dev": "rollup -c example2/rollup.config.js -w",
     "test2_start": "sirv example2/public -p 5001",
-    "test": "ava",
-    "test_update_snapshots": "ava --update-snapshots"
+    "test": "ava --timeout 30s",
+    "test_update_snapshots": "ava --update-snapshots --timeout 30s"
   },
   "ava": {
     "files": [
@@ -51,6 +51,6 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
-    "svelte-iconify-svg": "^2.1.1"
+    "svelte-iconify-svg": "file:../svelte-iconify-svg"
   }
 }
