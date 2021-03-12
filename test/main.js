@@ -7,6 +7,7 @@ const { rollup } = require("rollup");
 const rolluppluginiconifysvg = require("../src/index");
 const withPage = require("./_withPage");
 const fs = require("fs");
+const del = require("del");
 const path = require("path");
 
 test("test1 basic", async (t) => {
@@ -150,7 +151,7 @@ test(
         const full_output_path = path.join(__dirname, "./outputs/test4e.js");
 
         //first run
-        fs.rmSync(full_output_path, { force: true });
+        await del([full_output_path]);
         const bundle1 = await rollup({
             input: "./test/fixtures/test1/test.js",
             plugins: [
@@ -188,7 +189,7 @@ test("test4f options - alwaysSave = true will overwrite file even if identical",
     const full_output_path = path.join(__dirname, "./outputs/test4f.js");
 
     //first run
-    fs.rmSync(full_output_path, { force: true });
+    await del([full_output_path]);
     const bundle1 = await rollup({
         input: "./test/fixtures/test1/test.js",
         plugins: [
