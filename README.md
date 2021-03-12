@@ -48,7 +48,7 @@ export default {
     // If you are using livereload, you may need to add a 'delay' to allow some time for the icons file to be created
     !production && livereload({ watch: "public", delay: 1000 }),
 
-    // If you are using watch, you may need to exclude the dest file to avoid recursive watching!
+    // If you are using watch, you may need to exclude the dest file(s) to avoid recursive watching!
     watch: {
       clearScreen: false,
       exclude:["public/build/icons.js"]
@@ -65,7 +65,8 @@ export default {
     -   src: either a path (string) to the folder to search, or array of paths (strings). If undefined it will default to 'src'
     -   dest: the filepath (string) where you want the icons saved
     -   if the dest is a directory rather than a file ending in ".js" then the plugin will run in experimental mode to save SVGs as files for embedding, instead of the default JS object. Not able to automatically style svg colours with this approach though.
--   commonJs: (optional) By default is false so you can easily embed your icons into svelte using ES6 import syntax, but set it to true if you wish to 'require' the file instead
+-   commonJs: By default is false so you can easily embed your icons into svelte using ES6 import syntax, but set it to true if you wish to 'require' the file instead
+-   alwaysSave: forces the iconify API network call and re-save of the icons file, instead of the default which will skip these if the icons list has not changed
 
 ### Example usage in svelte using the @html feature
 

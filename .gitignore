@@ -3,3 +3,4 @@
 test/outputs/*
 .DS_Store
 **/icons*.js
+src/icons.js
