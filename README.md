@@ -40,7 +40,7 @@ export default {
 
   plugins: [
     rolluppluginiconifysvg({
-        targets: [{ src: "src", dest: "public/build/icons.js" }],
+        targets: [{ src: "src", dest: "src/icons.js" }],
     }),
 
     // ...other rollup plugins
@@ -51,7 +51,7 @@ export default {
     // If you are using watch, you may need to exclude the dest file(s) to avoid recursive watching!
     watch: {
       clearScreen: false,
-      exclude:["public/build/icons.js"]
+      exclude:["src/icons.js"]
     },
 
     ]
