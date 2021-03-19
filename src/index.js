@@ -10,6 +10,7 @@ const rolluppluginiconifysvg = (options = {}) => {
         commonJs = false,
         alwaysSave = false,
         recursive = false,
+        logging = true,
     } = options;
     return {
         name: "rolluppluginiconifysvg",
@@ -22,6 +23,7 @@ const rolluppluginiconifysvg = (options = {}) => {
                     commonJs,
                     alwaysSave,
                     recursive,
+                    logging,
                 };
                 svelteiconifysvg(src, dest, options);
             });
