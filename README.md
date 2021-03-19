@@ -68,6 +68,7 @@ export default {
 -   commonJs: By default is false so you can easily embed your icons into svelte using ES6 import syntax, but set it to true if you wish to 'require' the file instead
 -   alwaysSave: forces the iconify API network call and re-save of the icons file, instead of the default which will skip these if the icons list has not changed
 -   recursive: recursively searches within each input directory, instead of the default which will only search within the first level of input directories
+-   logging: controls the amount of console.logs. Leave it on to help with debugging, or reduce if it's getting too noisy for your workflow, options are 'all'|true, 'some', 'none'|false
 
 ### Example usage in svelte using the @html feature
 
