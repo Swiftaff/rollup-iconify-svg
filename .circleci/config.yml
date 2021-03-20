@@ -3,11 +3,6 @@ workflows:
     node-tests:
         jobs:
             build:
-                filters:
-                    branches:
-                        only:
-                            - master
-                            - ci
                 docker:
                     - image: circleci/node:12 # Use your desired version
                       environment:
@@ -29,3 +24,8 @@ workflows:
                     - run:
                           name: Run tests
                           command: npm run test
+                filters:
+                    branches:
+                        only:
+                            - master
+                            - ci
