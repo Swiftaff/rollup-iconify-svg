@@ -9,7 +9,6 @@ version: 2.1
 workflows:
     node-tests:
         jobs:
-            - build: *only-run-on-master-ci-branches
             - deploy:
                   <<: *only-run-on-master-ci-branches
                   docker:
