@@ -69,6 +69,7 @@ export default {
 -   alwaysSave: forces the iconify API network call and re-save of the icons file, instead of the default which will skip these if the icons list has not changed
 -   recursive: recursively searches within each input directory, instead of the default which will only search within the first level of input directories
 -   logging: controls the amount of console.logs. Leave it on to help with debugging, or reduce if it's getting too noisy for your workflow, options are 'all'|true, 'some', 'none'|false
+-   transform: fix for when some of your font awesome icons are reversed. Default is false. Set to true to enabled vertical or horizontal flipping for a small subset of fa icons such as fa:chevron-right and fa:arrow-circle-down. Introduced in 2.2.3
 
 ### Example usage in svelte using the @html feature
 
