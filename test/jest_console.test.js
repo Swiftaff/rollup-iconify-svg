@@ -2,7 +2,7 @@ const rolluppluginiconifysvg = require("../src/index");
 const { rollup } = require("rollup");
 const path = require("path");
 const del = require("del");
-const VERSION_OF_SIS = "2.2.2";
+const VERSION_OF_SIS = "2.3.0";
 
 //output not important in any of these tests - just testing console logging
 
