@@ -28,4 +28,3 @@ workflows:
                         - run:
                               name: Run tests
                               command: npm run test
-                              filters:
