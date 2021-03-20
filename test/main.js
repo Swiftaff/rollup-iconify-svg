@@ -285,3 +285,53 @@ test("test5c options - recursive missing will only search within input directori
     const icons = require("./outputs/test5c.js");
     t.snapshot(icons);
 });
+
+test("test 13a fn - option transform [default=false] - check that g transform is NOT included for fa hFLip and vFlip examples by default", async (t) => {
+    const bundle = await rollup({
+        input: "./test/fixtures/test13/test.js",
+        plugins: [
+            rolluppluginiconifysvg({
+                targets: [{ src: "./test/fixtures/test13", dest: "./test/outputs/test13/test13a.js" }],
+                commonJs: true, // allows output file to be required below
+                alwaysSave: true,
+            }),
+        ],
+    });
+    await bundle.generate({ format: "cjs" });
+    const icons = require("./outputs/test13/test13a.js");
+    t.snapshot(icons);
+});
+
+test("test 13b fn - option transform = false - check that g transform is NOT included for fa hFLip and vFlip examples", async (t) => {
+    const bundle = await rollup({
+        input: "./test/fixtures/test13/test.js",
+        plugins: [
+            rolluppluginiconifysvg({
+                targets: [{ src: "./test/fixtures/test13", dest: "./test/outputs/test13/test13b.js" }],
+                commonJs: true, // allows output file to be required below
+                alwaysSave: true,
+                transform: false,
+            }),
+        ],
+    });
+    await bundle.generate({ format: "cjs" });
+    const icons = require("./outputs/test13/test13b.js");
+    t.snapshot(icons);
+});
+
+test("test 13c fn - option transform = true - check that g transform IS included for fa hFLip and vFlip examples", async (t) => {
+    const bundle = await rollup({
+        input: "./test/fixtures/test13/test.js",
+        plugins: [
+            rolluppluginiconifysvg({
+                targets: [{ src: "./test/fixtures/test13", dest: "./test/outputs/test13/test13c.js" }],
+                commonJs: true, // allows output file to be required below
+                alwaysSave: true,
+                transform: true,
+            }),
+        ],
+    });
+    await bundle.generate({ format: "cjs" });
+    const icons = require("./outputs/test13/test13c.js");
+    t.snapshot(icons);
+});
