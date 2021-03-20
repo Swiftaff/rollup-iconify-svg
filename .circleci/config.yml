@@ -27,4 +27,4 @@ jobs:
                       branches:
                           only:
                               - master
-                              - 2.2.2
+                              - ci
