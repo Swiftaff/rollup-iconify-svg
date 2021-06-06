@@ -1,5 +1,6 @@
 const svelte = require("rollup-plugin-svelte");
 const { nodeResolve } = require("@rollup/plugin-node-resolve");
+const css = require("rollup-plugin-css-only");
 const commonjs = require("@rollup/plugin-commonjs");
 const { terser } = require("rollup-plugin-terser");
 const test = require("ava");
@@ -64,6 +65,7 @@ test("test3 build another svelte app", withPage, async (t, page) => {
                 browser: true,
                 dedupe: ["svelte"],
             }),
+            css({ output: "bundle.css" }),
             commonjs(),
             terser(),
         ],
