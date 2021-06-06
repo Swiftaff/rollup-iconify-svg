@@ -93,7 +93,9 @@ test("test 12d fn - option logging='some' for presaved file", async () => {
 
     const bundle = await rollup({
         input: "./test/fixtures/test1/test.js",
-        onwarn: (_warning) => {}, // ignores the warning for 'Generated an empty chunk: "test"'
+        onwarn: (_warning, _handler) => {
+            return;
+        }, // ignores the warning for 'Generated an empty chunk: "test"'
         plugins: [
             rolluppluginiconifysvg({
                 targets: [{ src: "./test/fixtures/test1", dest: filepath }],
@@ -118,7 +120,9 @@ test("test 12e fn - option logging='none' for presaved file", async () => {
 
     const bundle = await rollup({
         input: "./test/fixtures/test1/test.js",
-        onwarn: (_warning) => {}, // ignores the warning for 'Generated an empty chunk: "test"'
+        onwarn: (_warning, _handler) => {
+            return;
+        }, // ignores the warning for 'Generated an empty chunk: "test"'
         plugins: [
             rolluppluginiconifysvg({
                 targets: [{ src: "./test/fixtures/test1", dest: filepath }],
@@ -138,7 +142,9 @@ test("test 12f fn - option logging=false for presaved file", async () => {
 
     const bundle = await rollup({
         input: "./test/fixtures/test1/test.js",
-        onwarn: (_warning) => {}, // ignores the warning for 'Generated an empty chunk: "test"'
+        onwarn: (_warning, _handler) => {
+            return;
+        }, // ignores the warning for 'Generated an empty chunk: "test"'
         plugins: [
             rolluppluginiconifysvg({
                 targets: [{ src: "./test/fixtures/test1", dest: filepath }],
